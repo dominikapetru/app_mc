@@ -39,7 +39,7 @@ st.write('Has introduït:', option2)
 
 # change the group
 st.subheader('Actualització final')
-
+df_final = df
 st.write(df_final)
 
 
