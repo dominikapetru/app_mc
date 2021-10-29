@@ -23,7 +23,7 @@ else:
 st.subheader('Canvi de preus per familia d\'articles')
 
 price0_des = df['Descripción'].values[0]
-price0 = st.number_input(label: price0_des)
+price0 = st.number_input(price0_des)
 
 
 @st.cache
