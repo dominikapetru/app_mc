@@ -17,7 +17,7 @@ else:
     st.write('S\'està esperant el fitxer CSV per pujar. Actualment s\'utilitzen paràmetres d\'entrada d\'exemple.')
     df2 = pd.read_csv('https://raw.githubusercontent.com/dominikapetru/app_mc/main/articles.csv')
     df_mod = df2.groupby(['Descripción']).first().reset_index()
-    df = df_mod[['Descripción', 'Nombre', 'Coste']]
+    df = df_mod[['Descripción','Coste']]
     st.write(df)
 
 st.subheader('Canvi de preus per familia d\'articles')
@@ -47,7 +47,7 @@ else:
 
 st.write('Actualització final')
 df3 = df_new.groupby(['Descripción']).first().reset_index()
-df_final = df3[['Descripción', 'Nombre', 'Coste']]
+df_final = df3[['Descripción','Coste']]
 st.write(df_final)
 
 
