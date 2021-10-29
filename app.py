@@ -31,8 +31,7 @@ option1 = st.selectbox(
 st.write('Has seleccionat:', option1)
 
 option2 = st.number_input(
-    'Quin és el nou preu?',
-    desc)
+    'Quin és el nou preu?')
 st.write('Has introduït:', option2)
 
 
