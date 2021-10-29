@@ -25,13 +25,21 @@ st.subheader('Canvi de preus per familia d\'articles')
 var = df['Descripción'].unique()
 desc = var.tolist()
 
-option = st.selectbox(
+option1 = st.selectbox(
     'Quina familia de preus vols canviar?',
     desc)
+st.write('Has seleccionat:', option1)
+
+option2 = st.number_input(
+    'Quin és el nou preu?',
+    desc)
+st.write('Has introduït:', option2)
+
 
 @st.cache
 def convert_df(df):
     return df.to_csv().encode('utf-8')
+
 
 csv = convert_df(df)
 st.download_button(
