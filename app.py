@@ -1,6 +1,5 @@
-from flask import Flask, request, jsonify
-app = Flask(__name__)
-# A welcome message to test our server
-@app.route('/')
-def index():
-    return "<h1>Hola Laia! Estic construint una app!</h1>"
+import streamlit as st
+import pandas as pd
+import numpy as np
+
+st.write("""Aplicació intel·ligent per canviar preus dels articles""")
