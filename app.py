@@ -38,16 +38,8 @@ option2 = st.number_input(
 st.write('Has introduït:', option2)
 
 # change the group
-if option1 and option2 is not None:
-    df_new = df[df['Descripción'] == 'option1']
-    df_new = df_new.assign(Coste=option2)
+st.subheader('Actualització final')
 
-else:
-    df_new = df
-
-st.write('Actualització final')
-df3 = df_new.groupby(['Descripción']).first().reset_index()
-df_final = df3[['Descripción','Coste']]
 st.write(df_final)
 
 
