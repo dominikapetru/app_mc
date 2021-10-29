@@ -8,5 +8,7 @@ Aplicació intel·ligent per canviar els preus dels articles.
 """)
 
 st.subheader('Entrada d\'usuari')
+uploaded_file = st.file_uploader("Carrega el fitxer CSV", type=["csv"])
+
 
 
