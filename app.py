@@ -3,4 +3,4 @@ app = Flask(__name__)
 # A welcome message to test our server
 @app.route('/')
 def index():
-    return "<h1>Hola Laia!</h1>"
+    return "<h1>Hola Laia! Estic construint una app!</h1>"
