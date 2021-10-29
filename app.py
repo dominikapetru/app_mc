@@ -2,8 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-st.write("""XAPAPP
-""")
+st.title('XAPAPP')
 st.write('Aplicació intel·ligent per canviar els preus dels articles.')
 st.subheader('Entrada d\'usuari')
 uploaded_file = st.file_uploader('Carrega el fitxer CSV', type=['cvs'])
@@ -23,9 +22,12 @@ else:
 
 st.subheader('Canvi de preus per familia d\'articles')
 
-price0_des = df['Descripción'].values[0]
-price0 = st.number_input(price0_des)
+var = df['Descripción'].unique()
+desc = var.tolist()
 
+option = st.selectbox(
+    'Quina familia de preus vols canviar?',
+    desc)
 
 @st.cache
 def convert_df(df):
