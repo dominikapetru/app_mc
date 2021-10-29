@@ -26,3 +26,14 @@ price0_des = df['Descripción'].values[0]
 price0 = st.number_input(label: price0_des)
 
 
+@st.cache
+def convert_df(df):
+    return df.to_csv().encode('utf-8')
+
+csv = convert_df(df)
+st.download_button(
+    label="Baixa les dades com a CSV",
+    data=csv,
+    file_name='large_df.csv',
+    mime='text/csv',
+    )
