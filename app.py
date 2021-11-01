@@ -5,7 +5,7 @@ import numpy as np
 st.title('XAPAPP')
 st.write('Aplicació intel·ligent per canviar els preus dels articles.')
 st.subheader('Entrada d\'usuari')
-uploaded_file = st.file_uploader('Carrega el fitxer CSV', type=['cvs'])
+uploaded_file = st.file_uploader('Carrega el fitxer CSV', type=['csv'])
 
 if uploaded_file is not None:
     st.write('S\'ha pujat un fitxer CSV.')
@@ -14,7 +14,7 @@ if uploaded_file is not None:
     df = df_mod[['Descripción', 'Nombre', 'Coste']]
     st.write(df)
 else:
-    st.write('S\'està esperant el fitxer CSV per pujar. Actualment s\'utilitzen paràmetres d\'entrada d\'exemple.')
+    st.write('S\'està esperant el fitxer XLSX per pujar. Actualment s\'utilitzen paràmetres d\'entrada d\'exemple.')
     df2 = pd.read_csv('https://raw.githubusercontent.com/dominikapetru/app_mc/main/articles.csv')
     df_mod = df2.groupby(['Descripción']).first().reset_index()
     df = df_mod[['Descripción','Coste']]
@@ -37,12 +37,14 @@ option2 = st.number_input(
     'Quin és el nou preu?')
 st.write('Has introduït:', option2)
 
-# change the group
+
 st.subheader('Actualització final')
-df_final = df
+
+# change the value of price
+df_final = df.loc[df.Descripción == option1, "Coste"] = option2
 st.write(df_final)
 
-
+# colect data and export file
 @st.cache
 def convert_df(df_final):
     return df_final.to_csv().encode('utf-8')
