@@ -3,6 +3,13 @@ import pandas as pd
 import numpy as np
 import base64
 from io import BytesIO
+import streamlit
+
+st.set_page_config(
+    page_title="Ex-stream-ly Cool App",
+    page_icon="🧊",
+    layout="wide",
+    initial_sidebar_state="expanded")
 
 st.title('XAPAPP')
 st.write('Aplicació intel·ligent per canviar els preus dels articles.')
@@ -43,25 +50,5 @@ st.write('Has introduït:', option2)
 st.subheader('Actualització final')
 
 # change the value of price
-df_final = df.loc[df.Descripción == option1, "Coste"] = option2
-st.write(df_final)
-
-
-def to_excel(df):
-    output = BytesIO()
-    writer = pd.ExcelWriter(output, engine='xlsxwriter')
-    df.to_excel(writer, sheet_name='Sheet1')
-    writer.save()
-    processed_data = output.getvalue()
-    return processed_data
-
-
-def get_table_download_link(df):
-    val = to_excel(df)
-    b64 = base64.b64encode(val)
-    return f'<a href="data:application/octet-stream;base64,{b64.decode()}" download="extract.xlsx">Download csv file</a>'
-
-
-# collect data and export file
-df = df_final
-st.markdown(get_table_download_link(df), unsafe_allow_html=True)
+df = df.loc[df.Descripción == option1, "Coste"] = option2
+st.write(df)
