@@ -4,6 +4,7 @@ import numpy as np
 import base64
 from io import BytesIO
 import streamlit
+import xlsxwriter
 
 st.set_page_config(
     page_title="xapapp",
