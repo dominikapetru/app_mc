@@ -51,5 +51,6 @@ option2 = float(option2)
 st.subheader('Actualització final')
 
 # change the value of price
+df['Descripción'].astype(str)
 df = df.loc[df.Descripción == 'option1', 'Coste'] = option2
 st.write(df)
