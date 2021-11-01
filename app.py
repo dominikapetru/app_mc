@@ -4,7 +4,6 @@ import numpy as np
 import base64
 from io import BytesIO
 import streamlit
-from openpyxl import Workbook
 
 st.set_page_config(
     page_title="xapapp",
@@ -57,8 +56,12 @@ st.write(df)
 
 @st.cache
 def convert_df(df):
-    return df.to_excel("articles.xlsx", sheet_name='Sheet_name_1')
-
+    output = BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+    df.to_excel(writer, index=False, sheet_name='Sheet1') # <--- here
+    writer.save()
+    processed_data = output.getvalue()
+    return processed_data
 
 xlsx = convert_df(df)
 st.download_button(
