@@ -6,9 +6,8 @@ from io import BytesIO
 import streamlit
 
 st.set_page_config(
-    page_title="Ex-stream-ly Cool App",
+    page_title="xapapp",
     page_icon="🧊",
-    layout="wide",
     initial_sidebar_state="expanded")
 
 st.title('XAPAPP')
@@ -50,5 +49,6 @@ st.write('Has introduït:', option2)
 st.subheader('Actualització final')
 
 # change the value of price
-df = df.loc[df.Descripción == option1, "Coste"] = option2
+df['Coste'].astype(float)
+df = df.loc[df.Descripción == option1, 'Coste'] = option2
 st.write(df)
