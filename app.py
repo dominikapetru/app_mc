@@ -55,8 +55,8 @@ mask = (df['Descripción'] == option1)
 df['Coste'][mask] = option2
 
 
-df = df.groupby(['Descripción']).first().reset_index()
-st.write(df[['Descripción','Coste']])
+a = df.groupby(['Descripción']).first().reset_index()
+st.write(a[['Descripción','Coste']])
 
 @st.cache
 def convert_df(df):
