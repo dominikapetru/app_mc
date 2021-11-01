@@ -36,19 +36,20 @@ desc = var.tolist()
 
 # select one group
 option1 = st.selectbox(
-    'Quina familia de preus vols canviar?',
-    desc)
+    'Quina familia de preus vols canviar?', desc)
 st.write('Has seleccionat:', option1)
+option1 = str(option1)
 
-# select one group
+
+# select new price
 option2 = st.number_input(
     'Quin és el nou preu?')
 st.write('Has introduït:', option2)
+option2 = float(option2)
 
 
 st.subheader('Actualització final')
 
 # change the value of price
-df['Coste'].astype(float)
 df = df.loc[df.Descripción == 'option1', 'Coste'] = option2
 st.write(df)
