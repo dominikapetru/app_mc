@@ -6,6 +6,7 @@ from io import BytesIO
 import streamlit
 import xlsxwriter
 
+
 st.set_page_config(
     page_title="xapapp",
     page_icon="🧊",
