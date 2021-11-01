@@ -21,7 +21,7 @@ if uploaded_file is not None:
     st.write('S\'ha pujat un fitxer XLSX.')
     df = pd.read_excel(uploaded_file)
     df_mod = df.groupby(['Descripción']).first().reset_index()
-    df1 = df_mod[['Descripción', 'Nombre', 'Coste']]
+    df1 = df_mod[['Descripción','Coste']]
     st.write(df1)
 else:
     st.write('S\'està esperant el fitxer XLSX per pujar. Actualment s\'utilitzen paràmetres d\'entrada d\'exemple.')
@@ -55,8 +55,9 @@ mask = (df['Descripción'] == option1)
 df['Coste'][mask] = option2
 
 
-a = df.groupby(['Descripción']).first().reset_index()
-st.write(a[['Descripción','Coste']])
+df_mod = df.groupby(['Descripción']).first().reset_index()
+df3 = df_mod2[['Descripción','Coste']]
+st.write(df3)
 
 @st.cache
 def convert_df(df):
