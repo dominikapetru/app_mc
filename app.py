@@ -55,10 +55,8 @@ mask = (df['Descripción'] == option1)
 df['Coste'][mask] = option2
 
 
-df_mod2 = df.groupby(['Descripción']).first().reset_index()
-df_final = df_mod2[['Descripción','Coste']]
-st.write(df_final)
-
+df = df.groupby(['Descripción']).first().reset_index()
+st.write(df[['Descripción','Coste']])
 
 @st.cache
 def convert_df(df):
@@ -70,7 +68,7 @@ def convert_df(df):
     return processed_data
 
 
-xlsx = convert_df(df_final)
+xlsx = convert_df(df)
 st.download_button(
     label="Download data as XLSX",
     data=xlsx,
