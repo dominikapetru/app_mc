@@ -50,7 +50,16 @@ option2 = float(option2)
 
 st.subheader('Actualització final')
 
-# change the value of price
-df['Descripción'].astype(str)
-df = df.loc[df.Descripción == 'option1', 'Coste'] = option2
-st.write(df)
+
+@st.cache
+def convert_df(df):
+    return df.to_excel("articles.xlsx", sheet_name='Sheet_name_1')
+
+
+xlsx = convert_df(df)
+st.download_button(
+    label="Download data as XLSX",
+    data=xlsx,
+    file_name='articles.xlsx',
+    mime='text/xlsx',
+    )
