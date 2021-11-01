@@ -19,16 +19,16 @@ uploaded_file = st.file_uploader('Carrega el fitxer XLSX', type=['xlsx'])
 
 if uploaded_file is not None:
     st.write('S\'ha pujat un fitxer XLSX.')
-    df1 = pd.read_excel(uploaded_file)
-    df_mod = df1.groupby(['Descripción']).first().reset_index()
-    df = df_mod[['Descripción', 'Nombre', 'Coste']]
-    st.write(df)
+    df = pd.read_excel(uploaded_file)
+    df_mod = df.groupby(['Descripción']).first().reset_index()
+    df1 = df_mod[['Descripción', 'Nombre', 'Coste']]
+    st.write(df1)
 else:
     st.write('S\'està esperant el fitxer XLSX per pujar. Actualment s\'utilitzen paràmetres d\'entrada d\'exemple.')
-    df2 = pd.read_csv('https://raw.githubusercontent.com/dominikapetru/app_mc/main/articles.csv')
-    df_mod = df2.groupby(['Descripción']).first().reset_index()
-    df = df_mod[['Descripción','Coste']]
-    st.write(df)
+    df = pd.read_csv('https://raw.githubusercontent.com/dominikapetru/app_mc/main/articles.csv')
+    df_mod = df.groupby(['Descripción']).first().reset_index()
+    df2 = df_mod[['Descripción','Coste']]
+    st.write(df2)
 
 st.subheader('Canvi de preus per familia d\'articles')
 
@@ -53,7 +53,11 @@ option2 = float(option2)
 st.subheader('Actualització final')
 mask = (df['Descripción'] == option1)
 df['Coste'][mask] = option2
-st.write(df)
+
+
+df_mod2 = df.groupby(['Descripción']).first().reset_index()
+df_final = df_mod2[['Descripción','Coste']]
+st.write(df_final)
 
 
 @st.cache
@@ -65,7 +69,8 @@ def convert_df(df):
     processed_data = output.getvalue()
     return processed_data
 
-xlsx = convert_df(df)
+
+xlsx = convert_df(df_final)
 st.download_button(
     label="Download data as XLSX",
     data=xlsx,
