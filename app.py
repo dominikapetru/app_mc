@@ -51,8 +51,10 @@ option2 = float(option2)
 
 # confirm
 if st.button('Confirmar'):
-    mask = (df['Descripción'] == option1)
-    df['Coste'][mask] = option2
+    df_help = df.copy()
+    mask = (df_help['Descripción'] == option1)
+    df_help['Coste'][mask] = option2
+    df = df_help()
 
 # final table
 st.subheader('Actualització final')
