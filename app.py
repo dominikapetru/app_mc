@@ -35,9 +35,9 @@ else:
 st.subheader('Canvi de preus per familia d\'articles')
 
 # names of the groups of articles
-var = df['Descripción'].unique()
-np.sort(var)
-desc = var.tolist()
+var1 = df['Descripción'].unique()
+var2 = np.sort(var1)
+desc = var2.tolist()
 
 
 # select one group
