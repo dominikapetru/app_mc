@@ -62,10 +62,11 @@ st.write(df3)
 
 
 # export to excel
-def convert_df(df):
+@st.cache
+def convert_df(df_to_convert):
     output = BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
-    df.to_excel(writer, index=False, sheet_name='Sheet1') # <--- here
+    df.to_excel(writer, index=False, sheet_name='Sheet1')
     writer.save()
     processed_data = output.getvalue()
     return processed_data
