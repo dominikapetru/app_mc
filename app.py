@@ -50,9 +50,12 @@ st.write('Has introduït:', option2)
 option2 = float(option2)
 
 
+if st.button('Confirmar'):
+    mask = (df['Descripción'] == option1)
+    df['Coste'][mask] = option2
+
+
 st.subheader('Actualització final')
-mask = (df['Descripción'] == option1)
-df['Coste'][mask] = option2
 
 
 df_mod2 = df.groupby(['Descripción']).first().reset_index()
