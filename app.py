@@ -49,11 +49,10 @@ option1 = str(option1)
 option2 = st.number_input('Quin és el nou preu?')
 st.write('Has introduït:', option2)
 option2 = float(option2)
-option1 = str(option2)
 
-
-mask = (df['Descripción'] == option1)
-df['Coste'][mask] = option2
+if st.button('Confirmar'):
+    mask = (df['Descripción'] == option1)
+    df['Coste'][mask] = option2
 
 
 # table
