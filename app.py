@@ -6,7 +6,7 @@ from io import BytesIO
 import streamlit
 import xlsxwriter
 import xlrd
-
+import SessionState
 
 # change the app name in browser
 st.set_page_config(
@@ -46,7 +46,6 @@ option1 = st.selectbox(
 st.write('Has seleccionat:', option1)
 option1 = str(option1)
 
-
 # select new price
 option2 = st.number_input(
     'Quin és el nou preu?')
@@ -54,8 +53,11 @@ st.write('Has introduït:', option2)
 option2 = float(option2)
 
 
-# confirm
-@st.cache
+# clicks for button
+ss = SessionState.get(x=1)
+
+
+# confirm function
 def confirm():
     mask = (df['Descripción'] == option1)
     df['Coste'][mask] = option2
@@ -65,6 +67,7 @@ def confirm():
 # button
 if st.button('Confirmar'):
     confirm()
+    ss.x = ss.x + 1
 
 
 # final table
