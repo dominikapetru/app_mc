@@ -6,17 +6,19 @@ from io import BytesIO
 import streamlit
 import xlsxwriter
 
-
+# change the app name in browser
 st.set_page_config(
     page_title="xapapp",
     page_icon="🧊",
     initial_sidebar_state="expanded")
 
+# initial info
 st.title('XAPAPP')
 st.write('Aplicació intel·ligent per canviar els preus dels articles.')
 st.subheader('Entrada d\'usuari')
 uploaded_file = st.file_uploader('Carrega el fitxer XLSX', type=['xlsx'])
 
+# file upload
 if uploaded_file is not None:
     st.write('S\'ha pujat un fitxer XLSX.')
     df = pd.read_excel(uploaded_file)
@@ -51,12 +53,14 @@ option2 = float(option2)
 
 
 # confirm
+@st.cache
 def confirm():
     mask = (df['Descripción'] == option1)
     df['Coste'][mask] = option2
     return df
 
 
+# button
 if st.button('Confirmar'):
     confirm()
 
@@ -68,6 +72,7 @@ df3 = df_mod2[['Descripción','Coste']]
 st.write(df3)
 
 
+# export to excel
 @st.cache
 def convert_df(df):
     output = BytesIO()
