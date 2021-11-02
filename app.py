@@ -5,7 +5,8 @@ import base64
 from io import BytesIO
 import streamlit as st
 import xlsxwriter
-import xlrd
+import openpyxl
+
 
 # change the app name in browser
 st.set_page_config(
