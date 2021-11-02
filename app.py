@@ -52,15 +52,10 @@ with st.form("my_form"):
     st.write('Has introduït:', option2)
     option2 = float(option2)
 
-    # confirm function
-    def confirm():
-        mask = (df['Descripción'] == option1)
-        df['Coste'][mask] = option2
-        return df
-
     # button
     if st.button('Confirmar y continuar'):
-        confirm()
+        mask = (df['Descripción'] == option1)
+        df['Coste'][mask] = option2
 
     # final table
     st.subheader('Actualització final')
