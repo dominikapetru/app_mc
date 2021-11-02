@@ -36,6 +36,7 @@ st.subheader('Canvi de preus per familia d\'articles')
 
 # names of the groups of articles
 var = df['Descripción'].unique()
+np.sort(var)
 desc = var.tolist()
 
 
@@ -51,14 +52,13 @@ option2 = float(option2)
 option1 = str(option2)
 
 
-# button
-if st.button('Confirmar y continuar'):
-    mask = (df['Descripción'] == option1)
-    df['Coste'][mask] = option2
+mask = (df['Descripción'] == option1)
+df['Coste'][mask] = option2
+
 
 # table
 df_mod2 = df.groupby(['Descripción']).first().reset_index()
-df3 = df_mod2[['Descripción','Coste']]
+df3 = df_mod2[['Descripción', 'Coste']]
 st.write(df3)
 
 
