@@ -55,7 +55,7 @@ mask = (df['Descripción'] == option1)
 df['Coste'][mask] = option2
 
 
-df_mod = df.groupby(['Descripción']).first().reset_index()
+df_mod2 = df.groupby(['Descripción']).first().reset_index()
 df3 = df_mod2[['Descripción','Coste']]
 st.write(df3)
 
