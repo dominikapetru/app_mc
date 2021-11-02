@@ -62,7 +62,7 @@ with st.form("my_form"):
     df3 = df_mod2[['Descripción','Coste']]
     st.write(df3)
 
-    submitted = st.form_submit_button("Guardar")
+    submit_button = st.form_submit_button(label='Guardar')
 
 
 # export to excel
