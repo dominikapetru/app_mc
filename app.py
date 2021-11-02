@@ -49,18 +49,24 @@ option2 = st.number_input(
 st.write('Has introduït:', option2)
 option2 = float(option2)
 
+
 # confirm
+def confirm():
+    mask = (df['Descripción'] == option1)
+    df['Coste'][mask] = option2
+    return df
+
+
 if st.button('Confirmar'):
-    df_help = df.copy()
-    mask = (df_help['Descripción'] == option1)
-    df_help['Coste'][mask] = option2
-    df = df_help
+    confirm()
+
 
 # final table
 st.subheader('Actualització final')
 df_mod2 = df.groupby(['Descripción']).first().reset_index()
 df3 = df_mod2[['Descripción','Coste']]
 st.write(df3)
+
 
 @st.cache
 def convert_df(df):
