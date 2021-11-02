@@ -54,7 +54,7 @@ if st.button('Confirmar'):
     df_help = df.copy()
     mask = (df_help['Descripción'] == option1)
     df_help['Coste'][mask] = option2
-    df = df_help()
+    df = df_help
 
 # final table
 st.subheader('Actualització final')
