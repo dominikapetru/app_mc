@@ -21,7 +21,7 @@ uploaded_file = st.file_uploader('Carrega el fitxer XLSX', type=['xlsx'])
 # file upload
 if uploaded_file is not None:
     st.write('S\'ha pujat un fitxer XLSX.')
-    df = pd.read_excel(uploaded_file, engine='openpyxl',sheet_name=None)
+    df = pd.read_excel(uploaded_file, sheet_name=None)
     df_mod = df.groupby(['Descripción']).first().reset_index()
     df1 = df_mod[['Descripción','Coste']]
     st.write(df1)
