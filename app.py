@@ -39,29 +39,31 @@ var = df['Descripción'].unique()
 desc = var.tolist()
 
 
-with st.form("my_form"):
-    # select one group
-    option1 = st.selectbox('Quina familia de preus vols canviar?', desc)
-    st.write('Has seleccionat:', option1)
-    option1 = str(option1)
+if 'count' not in st.session_state:
+    st.session_state.count = 0
 
-    # select new price
-    option2 = st.number_input('Quin és el nou preu?')
-    st.write('Has introduït:', option2)
-    option2 = float(option2)
 
-    # button
-    if st.button('Confirmar y continuar'):
-        mask = (df['Descripción'] == option1)
-        df['Coste'][mask] = option2
+# select one group
+option1 = st.selectbox('Quina familia de preus vols canviar?', desc)
+st.write('Has seleccionat:', option1)
+option1 = str(option1)
 
-    # final table
-    st.subheader('Actualització final')
-    df_mod2 = df.groupby(['Descripción']).first().reset_index()
-    df3 = df_mod2[['Descripción','Coste']]
-    st.write(df3)
+# select new price
+option2 = st.number_input('Quin és el nou preu?')
+st.write('Has introduït:', option2)
+option2 = float(option2)
 
-    submit_button = st.form_submit_button(label='Guardar')
+# button
+if st.button('Confirmar y continuar'):
+    mask = (df['Descripción'] == option1)
+    df['Coste'][mask] = option2
+    st.session_state.count += 1
+
+# final table
+st.subheader('Actualització final')
+df_mod2 = df.groupby(['Descripción']).first().reset_index()
+df3 = df_mod2[['Descripción','Coste']]
+st.write(df3)
 
 
 # export to excel
