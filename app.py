@@ -63,7 +63,7 @@ if st.button('Confirmar y continuar'):
 st.subheader('Actualització final')
 df_mod2 = df.groupby(['Descripción']).first().reset_index()
 df3 = df_mod2[['Descripción','Coste']]
-st.write(df3)
+st.write(df3, st.session_state.count)
 
 
 # export to excel
