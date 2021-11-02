@@ -57,19 +57,15 @@ if option2:
     option1 = str(option2)
 
 
-# changing
-def my_process():
-    mask = (df['Descripción'] == option1)
-    df['Coste'][mask] = option2
-    df_mod2 = df.groupby(['Descripción']).first().reset_index()
-    df3 = df_mod2[['Descripción','Coste']]
-    st.write(df3)
-
-
 # button
 if st.button('Confirmar y continuar'):
-    while True:
-        my_process()
+    mask = (df['Descripción'] == option1)
+    df['Coste'][mask] = option2
+
+# table
+df_mod2 = df.groupby(['Descripción']).first().reset_index()
+df3 = df_mod2[['Descripción','Coste']]
+st.write(df3)
 
 
 # export to excel
