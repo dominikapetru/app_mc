@@ -60,7 +60,7 @@ with st.form("my_form"):
 
     # button
     if st.button('Confirmar y continuar'):
-    confirm()
+        confirm()
 
     # final table
     st.subheader('Actualització final')
