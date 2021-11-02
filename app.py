@@ -48,7 +48,7 @@ option1 = st.selectbox('Quina familia de preus vols canviar?', desc)
 st.write('Has seleccionat:', option1)
 if option1:
     option1 = str(option1)
-
+    st.session_state.count += 1
 
 # select new price
 option2 = st.number_input('Quin és el nou preu?')
@@ -56,7 +56,7 @@ st.write('Has introduït:', option2)
 option2 = float(option2)
 if option2:
     option1 = str(option2)
-
+    st.session_state.count += 1
 
 # button
 if st.button('Confirmar y continuar'):
