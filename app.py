@@ -3,10 +3,9 @@ import pandas as pd
 import numpy as np
 import base64
 from io import BytesIO
-import streamlit
+import streamlit as st
 import xlsxwriter
 import xlrd
-import SessionState
 
 # change the app name in browser
 st.set_page_config(
@@ -40,45 +39,38 @@ st.subheader('Canvi de preus per familia d\'articles')
 var = df['Descripción'].unique()
 desc = var.tolist()
 
-# select one group
-option1 = st.selectbox(
-    'Quina familia de preus vols canviar?', desc)
-st.write('Has seleccionat:', option1)
-option1 = str(option1)
 
-# select new price
-option2 = st.number_input(
-    'Quin és el nou preu?')
-st.write('Has introduït:', option2)
-option2 = float(option2)
+with st.form("my_form"):
+    # select one group
+    option1 = st.selectbox('Quina familia de preus vols canviar?', desc)
+    st.write('Has seleccionat:', option1)
+    option1 = str(option1)
 
+    # select new price
+    option2 = st.number_input('Quin és el nou preu?')
+    st.write('Has introduït:', option2)
+    option2 = float(option2)
 
-# clicks for button
-ss = SessionState.get(x=1)
+    # confirm function
+    def confirm():
+        mask = (df['Descripción'] == option1)
+        df['Coste'][mask] = option2
+        return df
 
-
-# confirm function
-def confirm():
-    mask = (df['Descripción'] == option1)
-    df['Coste'][mask] = option2
-    return df
-
-
-# button
-if st.button('Confirmar'):
+    # button
+    if st.button('Confirmar y continuar'):
     confirm()
-    ss.x = ss.x + 1
 
+    # final table
+    st.subheader('Actualització final')
+    df_mod2 = df.groupby(['Descripción']).first().reset_index()
+    df3 = df_mod2[['Descripción','Coste']]
+    st.write(df3)
 
-# final table
-st.subheader('Actualització final')
-df_mod2 = df.groupby(['Descripción']).first().reset_index()
-df3 = df_mod2[['Descripción','Coste']]
-st.write(df3)
+    submitted = st.form_submit_button("Guardar")
 
 
 # export to excel
-@st.cache
 def convert_df(df):
     output = BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
