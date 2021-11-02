@@ -5,7 +5,6 @@ import base64
 from io import BytesIO
 import streamlit as st
 import xlsxwriter
-import openpyxl
 
 
 # change the app name in browser
