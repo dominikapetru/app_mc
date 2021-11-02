@@ -49,15 +49,13 @@ option2 = st.number_input(
 st.write('Has introduït:', option2)
 option2 = float(option2)
 
-
+# confirm
 if st.button('Confirmar'):
     mask = (df['Descripción'] == option1)
     df['Coste'][mask] = option2
 
-
+# final table
 st.subheader('Actualització final')
-
-
 df_mod2 = df.groupby(['Descripción']).first().reset_index()
 df3 = df_mod2[['Descripción','Coste']]
 st.write(df3)
@@ -72,10 +70,10 @@ def convert_df(df):
     return processed_data
 
 
-xlsx = convert_df(df)
+xls = convert_df(df)
 st.download_button(
     label="Download data as XLSX",
-    data=xlsx,
+    data=xls,
     file_name='articles.xlsx',
     mime='text/xlsx',
     )
