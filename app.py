@@ -41,22 +41,17 @@ desc = var2.tolist()
 
 # list of new prices
 prices = []
-
+i = 0
 
 # changing prices for each group
 for i in range(len(desc)):
     st.write(desc[i])
-    new_price = st.number_input('Quin és el nou preu?')
-    st.write('Has introduït:', new_price)
-    new_price = float(new_price)
-    prices.append(new_price)
 
 
 # confirm
 if st.button('Confirmar'):
-    for i in range(len(desc)):
-        mask = (df['Descripción'] == desc[i])
-        df['Coste'][mask] = new_price[i]
+    mask = (df['Descripción'] == desc[i])
+    df['Coste'][mask] = new_price[i]
 
 
 # table
