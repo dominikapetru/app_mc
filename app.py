@@ -66,8 +66,11 @@ i = 0
 # changing prices for each group
 with st.form('my form'):
     for i in range(len(desc)):
-        st.write((i+1), desc[i])
-        x = st.number_input('Quin és el nou preu?', key=i)
+        num = i+1
+        st.write(num, desc[i])
+        y = df.loc[df.Descripción == desc[i], "Coste"]
+        z = y.iloc[0]
+        x = st.number_input('Quin és el nou preu?', key=i, value=z)
         x = float(x)
         prices.append(x)
     submitted = st.form_submit_button(label='Submit')
