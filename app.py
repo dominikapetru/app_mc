@@ -20,36 +20,16 @@ uploaded_file = st.file_uploader('Carrega el fitxer XLSX', type=['xlsx'])
 
 # file upload
 if uploaded_file is not None:
-    st.write('S\'ha pujat un fitxer XLSX.')
+    st.write('S\'ha pujat un fitxer XLSX. Aquestes són els famílies de materials.')
     df = pd.read_excel(uploaded_file)
     df_mod = df.groupby(['Descripción']).first().reset_index()
     df1 = df_mod[['Descripción','Coste']]
-    st.markdown("""
-        <style>
-        table td:nth-child(1) {
-            display: none
-        }
-        table th:nth-child(1) {
-            display: none
-        }
-        </style>
-        """, unsafe_allow_html=True)
     st.write(df1)
 else:
     st.write('S\'està esperant el fitxer XLSX per pujar. Actualment s\'utilitzen paràmetres d\'entrada d\'exemple.')
     df = pd.read_csv('https://raw.githubusercontent.com/dominikapetru/app_mc/main/articles.csv')
     df_mod = df.groupby(['Descripción']).first().reset_index()
     df2 = df_mod[['Descripción','Coste']]
-    st.markdown("""
-    <style>
-    table td:nth-child(1) {
-        display: none
-    }
-    table th:nth-child(1) {
-        display: none
-    }
-    </style>
-    """, unsafe_allow_html=True)
     st.write(df2)
 
 st.subheader('Canvi de preus per familia d\'articles')
@@ -67,6 +47,7 @@ i = 0
 with st.form('my form'):
     for i in range(len(desc)):
         num = i+1
+        num = str(num)
         st.write(num, desc[i])
         y = df.loc[df.Descripción == desc[i], "Coste"]
         z = y.iloc[0]
@@ -82,6 +63,7 @@ with st.form('my form'):
 
 
 # table
+st.subheader('Preus actualitzats')
 df_mod2 = df.groupby(['Descripción']).first().reset_index()
 df3 = df_mod2[['Descripción', 'Coste']]
 st.write(df3)
