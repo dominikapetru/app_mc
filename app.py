@@ -47,7 +47,7 @@ i = 0
 with st.form('my form'):
     for i in range(len(desc)):
         num = i+1
-        num = '**{num:.2f}**'
+        num = str(num)
         st.write(num, desc[i])
         y = df.loc[df.Descripción == desc[i], "Coste"]
         z = y.iloc[0]
