@@ -44,14 +44,18 @@ prices = []
 i = 0
 
 # changing prices for each group
-for i in range(len(desc)):
-    st.write(desc[i])
+with st.form('my form'):
+    for i in range(len(desc)):
+        st.write(desc[i])
+        x = st.number_input('Quin és el nou preu?', key=i)
+        x = float(x)
+        prices.append(x)
+    submitted = st.form_submit_button(label='Submit')
 
-
-# confirm
-if st.button('Confirmar'):
-    mask = (df['Descripción'] == desc[i])
-    df['Coste'][mask] = new_price[i]
+    if submitted:
+        for i in range(len(desc)):
+            mask = (df['Descripción'] == desc[i])
+            df['Coste'][mask] = prices[i]
 
 
 # table
