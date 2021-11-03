@@ -24,12 +24,32 @@ if uploaded_file is not None:
     df = pd.read_excel(uploaded_file)
     df_mod = df.groupby(['Descripción']).first().reset_index()
     df1 = df_mod[['Descripción','Coste']]
+    st.markdown("""
+        <style>
+        table td:nth-child(1) {
+            display: none
+        }
+        table th:nth-child(1) {
+            display: none
+        }
+        </style>
+        """, unsafe_allow_html=True)
     st.write(df1)
 else:
     st.write('S\'està esperant el fitxer XLSX per pujar. Actualment s\'utilitzen paràmetres d\'entrada d\'exemple.')
     df = pd.read_csv('https://raw.githubusercontent.com/dominikapetru/app_mc/main/articles.csv')
     df_mod = df.groupby(['Descripción']).first().reset_index()
     df2 = df_mod[['Descripción','Coste']]
+    st.markdown("""
+    <style>
+    table td:nth-child(1) {
+        display: none
+    }
+    table th:nth-child(1) {
+        display: none
+    }
+    </style>
+    """, unsafe_allow_html=True)
     st.write(df2)
 
 st.subheader('Canvi de preus per familia d\'articles')
@@ -46,7 +66,7 @@ i = 0
 # changing prices for each group
 with st.form('my form'):
     for i in range(len(desc)):
-        st.write(desc[i])
+        st.write((i+1), desc[i])
         x = st.number_input('Quin és el nou preu?', key=i)
         x = float(x)
         prices.append(x)
