@@ -39,20 +39,24 @@ var1 = df['Descripción'].unique()
 var2 = np.sort(var1)
 desc = var2.tolist()
 
+# list of new prices
+prices = []
 
-# select one group
-option1 = st.selectbox('Quina familia de preus vols canviar?', desc)
-st.write('Has seleccionat:', option1)
-option1 = str(option1)
 
-# select new price
-option2 = st.number_input('Quin és el nou preu?')
-st.write('Has introduït:', option2)
-option2 = float(option2)
+# changing prices for each group
+for i in range(len(desc)):
+    st.write(desc[i])
+    new_price = st.number_input('Quin és el nou preu?')
+    st.write('Has introduït:', new_price)
+    new_price = float(new_price)
+    prices.append(new_price)
 
+
+# confirm
 if st.button('Confirmar'):
-    mask = (df['Descripción'] == option1)
-    df['Coste'][mask] = option2
+    for i in range(len(desc)):
+        mask = (df['Descripción'] == desc[i])
+        df['Coste'][mask] = new_price[i]
 
 
 # table
